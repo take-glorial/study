@@ -1,0 +1,2 @@
+DELETE FROM USER WHERE ID = 'test';
+INSERT INTO USER (ID, NAME, PASSWORD) VALUES ('test', '테스트', 'test');
