@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>study index page</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<h1 th:text="${hello}"></h1>
+	<h1 th:text="${userCount} + ' 명'" ></h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5" style="background: #999;">
+				test1
+			</div>
+			<div class="col-lg-5" style="background: #ccc;">
+				test2
+			</div>
+		</div>
+	</div>
+</body>
+</html>
