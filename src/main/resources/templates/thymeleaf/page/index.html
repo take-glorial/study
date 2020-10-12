@@ -13,33 +13,12 @@ page Css
 
 <!-- page 스크립트 -->
 <th:block layout:fragment="pageScript">
-	<script type="text/javascript">
+	<script th:src="@{/js/board.js}"></script>
+
+	<script>
 		$(document).ready(function () {
-
-			$("#btnAjax").on("click",function(){
-				const mainDTO = {
-					searchText : "테스트입니다."
-				}
-
-				$.ajax({
-			        url : "/ajaxTest",
-			        data : JSON.stringify(mainDTO),
-			        type :"post",
-			        contentType : "application/json",
-			        dataType :'json',
-			        cache : false
-				}).done(function(fragment){
-			    	$("#boardList").replaceWith(fragment);
-			    }).fail(function(err){
-			    	console.log('error', err);
-			    });
-			});
-
 			$("#btnForm").on("click",function(){
-				const mainDTO = {
-					searchText : "테스트입니다."
-				}
-
+				const mainDTO = {searchText:'ajax post 테스트'};
 				const queryString = Object.keys(mainDTO)
 										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
 										    .join('&');
@@ -55,6 +34,30 @@ page Css
 			    });
 			});
 
+			$("#btnAjax").on("click",function(){
+				const mainDTO = {searchText:'ajax post 테스트'};
+				const queryString = Object.keys(mainDTO)
+										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
+										    .join('&');
+
+				$.ajax({
+			        url : "/ajaxTest",
+			        data : queryString,
+			        type :"post",
+			        contentType : "application/json",
+			        cache : false
+				}).done(function(fragment){
+			    	$("#boardList").replaceWith(fragment);
+			    }).fail(function(err){
+			    	console.log('error', err);
+			    });
+			});
+
+			$("#btnFetch").on("click", function(){
+				boardSelect({searchText:'fetch post 테스트'})
+			    .then(res => $("#boardList").replaceWith(res))
+			    .catch(err => console.error(err));
+			});
 		});
 	</script>
 </th:block>
@@ -64,8 +67,9 @@ page Css
 	    <h1 class="mt-5">업무화면</h1>
 	    <p class="lead">어쩌고 저쩌고</p>
 
-		<input value="ajaxTest" type="button" id="btnAjax" >
 		<input value="formTest" type="button" id="btnForm" >
+		<input value="ajaxTest" type="button" id="btnAjax" >
+		<input value="fetchTest" type="button" id="btnFetch" >
 
 	    <div id="boardList">
 	    	<th:block th:if="${ mainDTO != null }">
