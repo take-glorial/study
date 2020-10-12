@@ -51,7 +51,7 @@ public class MainController {
 		return "thymeleaf/page/index :: #boardList";
 	}
 
-	//(Setter 불필요)POST방식으로 Json의 형태로 넘겨온 데이터를 (MessageConverter가)객체로 바인딩
+	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
 	@GetMapping(value = "/fetchGetTest")
 	public String fetchGetTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
