@@ -23,11 +23,24 @@ const request = (options={}) => {
 	return fetch(options.url, fetchConfig);
 };
 
-function boardSelect(data) {
+function fetchPost(data) {
   return request({
     url: "/fetchPostTest",
-    method: "post",
+    method: "POST",
     data
+  }).then((res) => {
+  	if (res.ok) return res.text();		//res.json, blob, formdata
+  	else alert('오류\r\n' + res.statusText);
+  });
+};
+
+function fetchGet(data) {
+  const queryString = Object.keys(data)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&');
+
+  return request({
+    url: "/fetchGetTest?" + queryString
   }).then((res) => {
   	if (res.ok) return res.text();		//res.json, blob, formdata
   	else alert('오류\r\n' + res.statusText);

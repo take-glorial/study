@@ -13,12 +13,12 @@ page Css
 
 <!-- page 스크립트 -->
 <th:block layout:fragment="pageScript">
-	<script th:src="@{/js/board.js}"></script>
+	<script th:src="@{/js/fetch.js}"></script>
 
 	<script>
 		$(document).ready(function () {
 			$("#btnForm").on("click",function(){
-				const mainDTO = {searchText:'ajax post 테스트'};
+				const mainDTO = {searchText:'form post 테스트'};
 				const queryString = Object.keys(mainDTO)
 										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
 										    .join('&');
@@ -35,7 +35,7 @@ page Css
 			});
 
 			$("#btnAjax").on("click",function(){
-				const mainDTO = {searchText:'ajax post 테스트'};
+				const mainDTO = {searchText:'ajax 테스트'};
 				const queryString = Object.keys(mainDTO)
 										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
 										    .join('&');
@@ -43,8 +43,6 @@ page Css
 				$.ajax({
 			        url : "/ajaxTest",
 			        data : queryString,
-			        type :"post",
-			        contentType : "application/json",
 			        cache : false
 				}).done(function(fragment){
 			    	$("#boardList").replaceWith(fragment);
@@ -53,8 +51,14 @@ page Css
 			    });
 			});
 
-			$("#btnFetch").on("click", function(){
-				boardSelect({searchText:'fetch post 테스트'})
+			$("#btnFetchGet").on("click", function(){
+				fetchGet({searchText:'fetch get 테스트'})
+			    .then(res => $("#boardList").replaceWith(res))
+			    .catch(err => console.error(err));
+			});
+
+			$("#btnFetchPost").on("click", function(){
+				fetchPost({searchText:'fetch post 테스트'})
 			    .then(res => $("#boardList").replaceWith(res))
 			    .catch(err => console.error(err));
 			});
@@ -69,7 +73,8 @@ page Css
 
 		<input value="formTest" type="button" id="btnForm" >
 		<input value="ajaxTest" type="button" id="btnAjax" >
-		<input value="fetchTest" type="button" id="btnFetch" >
+		<input value="fetchGetTest" type="button" id="btnFetchGet" >
+		<input value="fetchPostTest" type="button" id="btnFetchPost" >
 
 	    <div id="boardList">
 	    	<th:block th:if="${ mainDTO != null }">

@@ -2,11 +2,11 @@ package kr.co.study.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.study.application.MainService;
 import kr.co.study.web.dto.MainDTO;
@@ -27,22 +27,33 @@ public class MainController {
 		return "thymeleaf/page/index";
 	}
 
-	@RequestMapping(value = "/ajaxTest", method = RequestMethod.POST)
-	public String ajaxTest(Model model, @RequestBody MainDTO dto) {
-		log.debug("dto : {}", dto);
-		model.addAttribute("mainDTO", dto);
-		return "thymeleaf/page/index :: #boardList";
-	}
-
-	@RequestMapping(value = "/formTest", method = RequestMethod.POST)
+	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
+	@PostMapping("/formTest")
 	public String formTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
 		return "thymeleaf/page/index :: #boardList";
 	}
 
+	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
+	@RequestMapping(value = "/ajaxTest")
+	public String ajaxTest(Model model, @ModelAttribute MainDTO dto) {
+		log.debug("dto : {}", dto);
+		model.addAttribute("mainDTO", dto);
+		return "thymeleaf/page/index :: #boardList";
+	}
+
+	//(Setter 불필요)POST방식으로 Json의 형태로 넘겨온 데이터를 (MessageConverter가)객체로 바인딩
 	@PostMapping(value = "/fetchPostTest")
-	public String fetchPostTest(Model model, @RequestBody MainDTO dto) throws InterruptedException {
+	public String fetchPostTest(Model model, @RequestBody MainDTO dto) {
+		log.debug("dto : {}", dto);
+		model.addAttribute("mainDTO", dto);
+		return "thymeleaf/page/index :: #boardList";
+	}
+
+	//(Setter 불필요)POST방식으로 Json의 형태로 넘겨온 데이터를 (MessageConverter가)객체로 바인딩
+	@GetMapping(value = "/fetchGetTest")
+	public String fetchGetTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
 		return "thymeleaf/page/index :: #boardList";
