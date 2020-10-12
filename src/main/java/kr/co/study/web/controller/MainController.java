@@ -20,7 +20,7 @@ public class MainController {
 
 	private final MainService service;
 
-	@RequestMapping(value = {"/"})
+	@RequestMapping({"/"})
 	public String index(Model model) {
 		model.addAttribute("hello", "Hello World");
 		model.addAttribute("userCount", service.getUserCount());
@@ -36,7 +36,7 @@ public class MainController {
 	}
 
 	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
-	@RequestMapping(value = "/ajaxTest")
+	@RequestMapping("/ajaxTest")
 	public String ajaxTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
@@ -44,7 +44,7 @@ public class MainController {
 	}
 
 	//(Setter 불필요)POST방식으로 Json의 형태로 넘겨온 데이터를 (MessageConverter가)객체로 바인딩
-	@PostMapping(value = "/fetchPostTest")
+	@PostMapping("/fetchPostTest")
 	public String fetchPostTest(Model model, @RequestBody MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
@@ -52,7 +52,7 @@ public class MainController {
 	}
 
 	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
-	@GetMapping(value = "/fetchGetTest")
+	@GetMapping("/fetchGetTest")
 	public String fetchGetTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
