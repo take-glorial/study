@@ -13,7 +13,7 @@ public class SigninController {
 
 	@GetMapping("/signin")
 	public String signin() {
-		return "thymeleaf/page/signin";
+		return "thymeleaf/signin";
 	}
 
 }
