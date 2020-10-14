@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 
 			.authorizeRequests()
+				.antMatchers("write-down-view-names").permitAll()
 				.anyRequest().authenticated()
 			.and()
 
