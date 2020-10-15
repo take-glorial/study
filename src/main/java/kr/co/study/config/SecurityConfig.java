@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 
 			.authorizeRequests()
-				.antMatchers("write-down-view-names").permitAll()
+				.antMatchers("/error").permitAll()
 				.anyRequest().authenticated()
 			.and()
 
@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutUrl("/signout")
 				.permitAll()
+				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true)
 			.and();
 	}

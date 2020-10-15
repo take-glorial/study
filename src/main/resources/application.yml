@@ -15,8 +15,7 @@ spring:
       jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
       driver-class-name: org.h2.Driver
       username: sa
-      password: sa
-      
+      password: sa      
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -27,4 +26,6 @@ logging:
   level:
     org.springframework: INFO
     org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
     kr.co.study: DEBUG
+    
