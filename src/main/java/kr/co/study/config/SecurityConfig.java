@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import kr.co.study.application.SignInService;
 
@@ -23,9 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+	@Bean
+    public SpringSecurityDialect springSecurityDialect(){
+        return new SpringSecurityDialect();
+    }
+
+
 	@Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/webjars/**", "/**/*.html", "/**/*.ico");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/webjars/**", "/**/*.html", "/**/*.ico", "/h2-console/**");
     }
 
 	@Override
@@ -46,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .defaultSuccessUrl("/")
 		        .failureUrl("/signin?error")
 	            .permitAll()
-			.and()
+	            .and()
 
 			.logout()
 				.logoutUrl("/signout")
@@ -55,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 			.and();
 	}
+
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
