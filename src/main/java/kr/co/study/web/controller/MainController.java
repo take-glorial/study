@@ -32,7 +32,7 @@ public class MainController {
 	public String formTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
-		return "thymeleaf/page/index :: #boardList";
+		return "thymeleaf/page/index :: #pageTest";
 	}
 
 	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
@@ -40,7 +40,7 @@ public class MainController {
 	public String ajaxTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
-		return "thymeleaf/page/index :: #boardList";
+		return "thymeleaf/page/index :: #pageTest";
 	}
 
 	//(Setter 불필요)POST방식으로 Json의 형태로 넘겨온 데이터를 (MessageConverter가)객체로 바인딩
@@ -48,7 +48,7 @@ public class MainController {
 	public String fetchPostTest(Model model, @RequestBody MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
-		return "thymeleaf/page/index :: #boardList";
+		return "thymeleaf/page/index :: #pageTest";
 	}
 
 	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
@@ -56,6 +56,6 @@ public class MainController {
 	public String fetchGetTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);
 		model.addAttribute("mainDTO", dto);
-		return "thymeleaf/page/index :: #boardList";
+		return "thymeleaf/page/index :: #pageTest";
 	}
 }

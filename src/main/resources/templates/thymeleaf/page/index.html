@@ -2,14 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="thymeleaf/layout/main">
+	layout:decorate="~{ thymeleaf/layout/main }">
 
-<!--
-page Css
 <th:block layout:fragment="pageCss">
-	<link rel="stylesheet" th:href="@{/css/page/home.css}">
+	<style>
+		#pageTest {
+	      background: #2db34a;
+	      outline: 1px solid black;
+	    }
+    </style>
 </th:block>
--->
 
 <!-- page 스크립트 -->
 <th:block layout:fragment="pageScript">
@@ -28,7 +30,7 @@ page Css
 			        data : queryString,
 			        type:"post",
 				}).done(function(fragment){
-			    	$("#boardList").replaceWith(fragment);
+			    	$("#pageTest").replaceWith(fragment);
 			    }).fail(function(err){
 			    	console.log('error', err);
 			    });
@@ -45,7 +47,7 @@ page Css
 			        data : queryString,
 			        cache : false
 				}).done(function(fragment){
-			    	$("#boardList").replaceWith(fragment);
+			    	$("#pageTest").replaceWith(fragment);
 			    }).fail(function(err){
 			    	console.log('error', err);
 			    });
@@ -53,13 +55,13 @@ page Css
 
 			$("#btnFetchGet").on("click", function(){
 				fetchGet({searchText:'fetch get 테스트'})
-			    .then(res => $("#boardList").replaceWith(res))
+			    .then(res => $("#pageTest").replaceWith(res))
 			    .catch(err => console.error(err));
 			});
 
 			$("#btnFetchPost").on("click", function(){
 				fetchPost({searchText:'fetch post 테스트'})
-			    .then(res => $("#boardList").replaceWith(res))
+			    .then(res => $("#pageTest").replaceWith(res))
 			    .catch(err => console.error(err));
 			});
 		});
@@ -76,9 +78,9 @@ page Css
 		<input value="fetchGetTest" type="button" id="btnFetchGet" >
 		<input value="fetchPostTest" type="button" id="btnFetchPost" >
 
-	    <div id="boardList">
+	    <div id="pageTest">
 	    	<th:block th:if="${ mainDTO != null }">
-		    	<span th:text="${ mainDTO.searchText }">보드테스트</span>
+		    	<span th:text="${ mainDTO.searchText }">테스트</span>
 		    </th:block>
 	    </div>
 	  </div>

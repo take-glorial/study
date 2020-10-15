@@ -15,7 +15,7 @@
 
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''}">
+				<li class="nav-item active" th:classappend="${#strings.isEmpty(module) ? 'active' : ''}">
 					<a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item" th:classappend="${module == 'board' ? 'active' : ''}">
