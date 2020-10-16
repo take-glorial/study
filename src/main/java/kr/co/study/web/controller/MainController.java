@@ -51,7 +51,7 @@ public class MainController {
 		return "thymeleaf/page/index :: #pageTest";
 	}
 
-	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
+	//(Setter 필요)ModelAttribute는 전달받은 파라미터들을 (Refelection)JavaObject로 매핑시키는 것이기 때문
 	@GetMapping("/fetchGetTest")
 	public String fetchGetTest(Model model, @ModelAttribute MainDTO dto) {
 		log.debug("dto : {}", dto);

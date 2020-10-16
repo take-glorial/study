@@ -25,7 +25,8 @@ mybatis:
 logging:
   level:
     org.springframework: INFO
-    org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
     kr.co.study: DEBUG
     
+server:  servlet:    context-path: /study
