@@ -25,7 +25,7 @@ const request = (options={}) => {
 
 function fetchPost(data) {
   return request({
-    url: "/fetchPostTest",
+    url: CONTEXTPATH + "fetchPostTest",
     method: "POST",
     data
   }).then((res) => {
@@ -40,7 +40,7 @@ function fetchGet(data) {
     .join('&');
 
   return request({
-    url: "/fetchGetTest?" + queryString
+    url: CONTEXTPATH + "fetchGetTest?" + queryString
   }).then((res) => {
   	if (res.ok) return res.text();		//res.json, blob, formdata
   	else alert('오류\r\n' + res.statusText);

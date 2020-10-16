@@ -15,11 +15,17 @@
 
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active" th:classappend="${#strings.isEmpty(module) ? 'active' : ''}">
-					<a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+				<li class="nav-item" th:classappend="${#strings.equals(#request.getServletPath(), '/') ? 'active' : ''}">
+					<a class="nav-link" href="#" th:href="@{/}">
+						Home
+						<span class="sr-only" th:if="${#strings.equals(#request.getServletPath(), '/')}">(current)</span>
+					</a>
 				</li>
-				<li class="nav-item" th:classappend="${module == 'board' ? 'active' : ''}">
-					<a class="nav-link" href="#">게시판</a>
+				<li class="nav-item" th:classappend="${#request.getServletPath() == '/board/list' ? 'active' : ''}">
+					<a class="nav-link" href="#" th:href="@{/board/list}">
+						게시판
+						<span class="sr-only" th:if="${#strings.equals(#request.getServletPath(), '/board/list')}">(current)</span>
+					</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
