@@ -36,7 +36,7 @@
 					<td>
 						<a th:href="@{|/board/${ board.id }|}" th:text="${ board.title }">링크</a>
 					</td>
-					<td class="text-center" th:text="${ #temporals.format(board.regDate, 'yyyy-MM-dd') }">2020-09-10</td>
+					<td class="text-center" th:text="${ #temporals.format(board.regDate, 'yyyy년 MM월 dd일') }">2020-09-10</td>
 					<td class="text-center" th:text="${ board.regId }">정해원</td>
 				</tr>
 			</tbody>
