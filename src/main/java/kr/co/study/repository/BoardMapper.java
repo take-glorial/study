@@ -1,13 +1,14 @@
 package kr.co.study.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import kr.co.study.domain.Board;
+
 @Repository
 @Mapper
 public interface BoardMapper {
-	List<Map<String,Object>> selectBoard();
+	List<Board> selectBoardList();
 }

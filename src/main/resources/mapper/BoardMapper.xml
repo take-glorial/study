@@ -3,8 +3,14 @@
 
 	<mapper namespace="kr.co.study.repository.BoardMapper">
 
-	<select id="selectBoard" resultType="map">
-	    SELECT * FROM BOARD
+	<select id="selectBoardList" resultType="kr.co.study.domain.Board">
+	    SELECT A.ID
+	         , A.TITLE
+	         , A.CONTENTS
+	         , A.REG_ID
+	         , A.REG_DATE
+	      FROM BOARD A
+	     ORDER BY A.ID
 	</select>
 
 </mapper>
