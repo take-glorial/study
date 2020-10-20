@@ -2,6 +2,7 @@ package kr.co.study.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,9 @@ public class BoardController {
 	private final BoardService boardService;
 
 	@GetMapping("list")
-	public String list(Model model) {
+	public String list(Model model, HttpSession session) {
+
+		log.debug("session:{}", session.getId());
 
 		/*
 
