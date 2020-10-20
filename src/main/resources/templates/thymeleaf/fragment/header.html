@@ -21,10 +21,10 @@
 						<span class="sr-only" th:if="${#strings.equals(#request.getServletPath(), '/')}">(current)</span>
 					</a>
 				</li>
-				<li class="nav-item" th:classappend="${#request.getServletPath() == '/board/list' ? 'active' : ''}">
+				<li class="nav-item" th:classappend="${#strings.contains(#request.getServletPath(), '/board/') ? 'active' : ''}">
 					<a class="nav-link" href="#" th:href="@{/board/list}">
 						게시판
-						<span class="sr-only" th:if="${#strings.equals(#request.getServletPath(), '/board/list')}">(current)</span>
+						<span class="sr-only" th:if="${#strings.contains(#request.getServletPath(), '/board/')}">(current)</span>
 					</a>
 				</li>
 			</ul>

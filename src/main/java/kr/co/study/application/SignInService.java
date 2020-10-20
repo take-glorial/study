@@ -1,10 +1,6 @@
 package kr.co.study.application;
 
-import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,9 +30,10 @@ public class SignInService implements UserDetailsService {
 			throw new UsernameNotFoundException("사용자 정보가 존재하지 않습니다.");
 		}
 
+		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		log.debug("User Info : {}", account);
-
-		return new User(account.getId(), passwordEncoder.encode(account.getPassword()), Collections.singleton(new SimpleGrantedAuthority(account.getRole())));
+		//return new Account(account.getId(), passwordEncoder.encode(account.getPassword()), Collections.singleton(new SimpleGrantedAuthority(account.getRole())));
+		return account;
 
 	}
 
