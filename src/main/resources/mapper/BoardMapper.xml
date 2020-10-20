@@ -13,4 +13,20 @@
 	     ORDER BY A.ID
 	</select>
 
+	<insert id="insertBoard" parameterType="kr.co.study.domain.Board">
+	    INSERT INTO
+	     BOARD ( ID
+	           , TITLE
+	           , CONTENTS
+	           , REG_ID
+	           , REG_DATE
+	           )
+	    VALUES ( (SELECT MAX(ID) + 1 FROM BOARD)
+	           , #{title}
+	           , #{contents}
+	           , #{regId}
+	           , now()
+	           )
+	</insert>
+
 </mapper>

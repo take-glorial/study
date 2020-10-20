@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ thymeleaf/layout/main }">
+
+<!--
+page Css
+<th:block layout:fragment="pageCss">
+	<link rel="stylesheet" th:href="@{/css/page/home.css}">
+</th:block>
+-->
+
+<!-- page 스크립트 -->
+<!-- page 스크립트 -->
+<th:block layout:fragment="pageScript">
+	<script th:src="@{/js/fetch.js}"></script>
+
+	<script>
+		$(document).ready(function () {
+			$("#ajaxPost").on("click",function(){
+				const boardDTO = Object.fromEntries(new FormData($("#boardFrm")[0]));
+				$.ajax({
+			        url: CONTEXTPATH + "board/writeProc",
+			        data : boardDTO,
+			        type:"post"
+				}).done(function(fragment){
+			    	$("#boardFrm").replaceWith(fragment);
+			    }).fail(function(err){
+			    	console.log('error', err);
+			    });
+			});
+
+
+			$("#ajaxJsonTest").on("click",function(){
+				const boardDTO = Object.fromEntries(new FormData($("#boardFrm")[0]));
+				$.ajax({
+			        url: CONTEXTPATH + "board/writeProcJson",
+			        data : JSON.stringify(boardDTO),
+			        type:"post",
+			        dataType:"JSON",
+			        contentType:"application/json"
+				}).done(function(fragment){
+			    	alert(fragment);
+			    }).fail(function(err){
+			    	alert(err);
+			    	console.log('error', err);
+			    });
+			});
+		});
+	</script>
+</th:block>
+
+<main layout:fragment="page" role="main" class="flex-shrink-0">
+	<div class="container">
+		write
+
+		<input value="ajaxPost" type="button" id="ajaxPost" >
+		<input value="ajaxJsonTest" type="button" id="ajaxJsonTest" >
+
+		<form action="#" id="boardFrm" th:action="@{/board/writeProc}" th:object="${board}" method="post">
+			<table>
+				<tr>
+					<td>id:</td>
+					<td><input type="text" th:field="*{id}" /></td>
+					<td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">id Error</td>
+				</tr>
+				<tr>
+					<td>title:</td>
+					<td><input type="text" th:field="*{title}" /></td>
+					<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</td>
+				</tr>
+				<tr>
+					<td>contents:</td>
+					<td><input type="text" th:field="*{contents}" /></td>
+					<td th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">contents Error</td>
+				</tr>
+			</table>
+		</form>
+
+	</div>
+</main>
+
+</html>

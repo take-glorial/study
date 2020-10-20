@@ -11,4 +11,6 @@ import kr.co.study.domain.Board;
 @Mapper
 public interface BoardMapper {
 	List<Board> selectBoardList();
+
+	Integer insertBoard(Board board);
 }
