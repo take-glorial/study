@@ -19,14 +19,14 @@
 
 	<script>
 		$(document).ready(function () {
-			$("#btnForm").on("click",function(){
-				const mainDTO = {searchText:'form post 테스트'};
+			$("#btnAjaxPost").on("click",function(){
+				const mainDTO = {searchText:'ajax post 테스트'};
 				const queryString = Object.keys(mainDTO)
 										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
 										    .join('&');
 
 				$.ajax({
-			        url: CONTEXTPATH + "formTest",
+			        url: CONTEXTPATH + "ajaxPostTest",
 			        data : queryString,
 			        type:"post",
 				}).done(function(fragment){
@@ -36,14 +36,14 @@
 			    });
 			});
 
-			$("#btnAjax").on("click",function(){
-				const mainDTO = {searchText:'ajax 테스트'};
+			$("#btnAjaxGet").on("click",function(){
+				const mainDTO = {searchText:'ajax get 테스트'};
 				const queryString = Object.keys(mainDTO)
 										    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(mainDTO[key])}`)
 										    .join('&');
 
 				$.ajax({
-			        url : CONTEXTPATH + "ajaxTest",
+			        url : CONTEXTPATH + "ajaxGetTest",
 			        data : queryString,
 			        cache : false
 				}).done(function(fragment){
@@ -54,13 +54,13 @@
 			});
 
 			$("#btnFetchGet").on("click", function(){
-				fetchGet({searchText:'fetch get 테스트'})
+				fetchGet('fetchGetTest', {searchText:'fetch get 테스트'})
 			    .then(res => $("#pageTest").replaceWith(res))
 			    .catch(err => console.error(err));
 			});
 
 			$("#btnFetchPost").on("click", function(){
-				fetchPost({searchText:'fetch post 테스트'})
+				fetchPost('fetchPostTest', {searchText:'fetch post 테스트'})
 			    .then(res => $("#pageTest").replaceWith(res))
 			    .catch(err => console.error(err));
 			});
@@ -73,8 +73,8 @@
 	    <h1 class="mt-5">업무화면</h1>
 	    <p class="lead">어쩌고 저쩌고</p>
 
-		<input value="formTest" type="button" id="btnForm" >
-		<input value="ajaxTest" type="button" id="btnAjax" >
+		<input value="ajaxGetTest" type="button" id="btnAjaxGet" >
+		<input value="ajaxPostTest" type="button" id="btnAjaxPost" >
 		<input value="fetchGetTest" type="button" id="btnFetchGet" >
 		<input value="fetchPostTest" type="button" id="btnFetchPost" >
 
