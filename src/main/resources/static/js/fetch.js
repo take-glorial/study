@@ -2,7 +2,7 @@ const request = (options={}) => {
 	const fetchConfig = {
         method : options.method || 'GET',
         body : JSON.stringify(options.data),
-        headers: {
+        headers: options.headers || {
             'Content-Type': 'application/json'
         },
         ...options
@@ -23,9 +23,9 @@ const request = (options={}) => {
 	return fetch(options.url, fetchConfig);
 };
 
-function fetchPost(data) {
+function fetchPost(url, data) {
   return request({
-    url: CONTEXTPATH + "fetchPostTest",
+    url: CONTEXTPATH + url,
     method: "POST",
     data
   }).then((res) => {
@@ -34,13 +34,13 @@ function fetchPost(data) {
   });
 };
 
-function fetchGet(data) {
+function fetchGet(url, data) {
   const queryString = Object.keys(data)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join('&');
 
   return request({
-    url: CONTEXTPATH + "fetchGetTest?" + queryString
+    url: CONTEXTPATH + url + '?' + queryString
   }).then((res) => {
   	if (res.ok) return res.text();		//res.json, blob, formdata
   	else alert('오류\r\n' + res.statusText);
