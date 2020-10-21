@@ -1,5 +1,7 @@
 package kr.co.study;
 
+import java.nio.charset.Charset;
+
 import javax.sql.DataSource;
 
 import org.springframework.boot.ApplicationArguments;
@@ -24,6 +26,8 @@ public class TestRunner implements ApplicationRunner {
 		log.debug("디버깅 시작");
 		log.debug("schema:{}", ds.getConnection().getSchema());
 		log.debug("count:{}", mainMapper.selectUserCount());
+		log.debug("encoding:{}", Charset.defaultCharset().displayName());
+		log.debug("encoding:{}", System.getProperty("file.encoding"));
 	}
 
 }
