@@ -25,7 +25,7 @@ public class TestRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		log.debug("디버깅 시작");
 		log.debug("schema:{}", ds.getConnection().getSchema());
-		log.debug("count:{}", mainMapper.selectUserCount());
+		//log.debug("count:{}", mainMapper.selectUserCount());
 		log.debug("encoding:{}", Charset.defaultCharset().displayName());
 		log.debug("encoding:{}", System.getProperty("file.encoding"));
 	}
