@@ -21,7 +21,7 @@
 	           , REG_ID
 	           , REG_DATE
 	           )
-	    VALUES ( (SELECT MAX(ID) + 1 FROM BOARD)
+	    VALUES ( (SELECT MAX(ID) + 1 FROM BOARD a)
 	           , #{title}
 	           , #{contents}
 	           , #{regId}

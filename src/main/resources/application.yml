@@ -7,16 +7,22 @@ spring:
       encoding: UTF-8
       view-names: thymeleaf/*
   datasource:
-    schema:
-    - classpath:schema/create.sql
-    data:
-    - classpath:schema/insert.sql
+    #schema:
+    #- classpath:schema/create.sql
+    #- classpath:org/springframework/session/jdbc/schema-mysql.sql
+    #data:
+    #- classpath:schema/insert.sql
     hikari:
-      jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+      #jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1 
       #jdbc-url: jdbc:h2:~/testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-      driver-class-name: org.h2.Driver
-      username: sa
-      password: sa  session:    store-type: redis  redis:    host: redis-study #172.18.0.2
+      #jdbc-url: jdbc:mysql://host.docker.internal:3306/testdb?autoReconnect=true&maxReconnects=20&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
+      jdbc-url: jdbc:mysql://mysql-container:3306/testdb?autoReconnect=true&maxReconnects=20&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
+      #jdbc-url: jdbc:mysql://localhost:3306/testdb?autoReconnect=true&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
+      #driver-class-name: org.h2.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root #sa
+      password: sa  session:
+    timeout: 600 #second    store-type: redis #redis    jdbc:      initialize-schema: always  redis:    host: redis-container #172.18.0.2
     port: 6379
 
 mybatis:
