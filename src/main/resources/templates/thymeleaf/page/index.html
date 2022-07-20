@@ -18,7 +18,7 @@
 	<script th:src="@{/js/fetch.js}"></script>
 
 	<script>
-		$(document).ready(function () {
+		$(function(){
 			$("#btnAjaxPost").on("click",function(){
 				const mainDTO = {searchText:'ajax post 테스트'};
 				const queryString = Object.keys(mainDTO)
@@ -83,7 +83,36 @@
 		    	<span th:text="${ mainDTO.searchText }">테스트</span>
 		    </th:block>
 	    </div>
-	  </div>
+
+	    <div id="tabTest">
+			<input type="button" value="id중복 테스트" id="btnTest"/>
+			<ul class="nav nav-tabs" id="mdiTab">
+				<li class="nav-item"><a class="nav-link" th:data-url="@{|/tab1|}" href="#tab1">tab1</a></li>
+				<li class="nav-item"><a class="nav-link" th:data-url="@{|/tab2|}" href="#tab2">tab2</a></li>
+				<li class="nav-item"><a class="nav-link" th:data-url="@{|/tab3|}" href="#tab3">tab3</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade" id="tab1"></div>
+				<div class="tab-pane fade" id="tab2"></div>
+				<div class="tab-pane fade" id="tab3"></div>
+			</div>
+
+			<script>
+				$('#mdiTab > .nav-item > a').click(function(e) {
+					e.preventDefault();
+
+					var url = $(this).attr("data-url");
+					var targetTab = this.hash;
+					var pane = $(this);
+
+					$(targetTab).load(url, function(result){
+						pane.tab('show');
+					});
+				});
+			</script>
+
+	    </div>
+	</div>
 </main>
 
 </html>

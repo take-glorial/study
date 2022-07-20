@@ -28,6 +28,21 @@ public class MainController {
 		return "thymeleaf/page/index";
 	}
 
+	@RequestMapping({"/tab1"})
+	public String tab1(Model model) {
+		return "thymeleaf/page/tab/tab1";
+	}
+
+	@RequestMapping({"/tab2"})
+	public String tab2(Model model) {
+		return "thymeleaf/page/tab/tab2";
+	}
+
+	@RequestMapping({"/tab3"})
+	public String tab3(Model model) {
+		return "thymeleaf/page/tab/tab3";
+	}
+
 	//ModelAttribute는 전달받은 파라미터들을 JavaObject로 매핑시키는 것이기 때문
 	//(기본생성자+Setter)
 	//(모든생성자)
